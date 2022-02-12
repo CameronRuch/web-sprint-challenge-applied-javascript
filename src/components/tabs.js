@@ -1,5 +1,5 @@
-import axios from "axios";
-import { response } from "express";
+import axios from 'axios';
+// import { response } from "express";
 
 const Tabs = (topics) => {
   // TASK 3
@@ -43,14 +43,10 @@ const tabsAppender = (selector) => {
   //
 
   axios.get('http://localhost:5000/api/topics')
-    .then( response => {
-      console.log(response);     
-      const tabsWrapper = document.querySelector(selector);
-      tabsWrapper.appendChild(Tabs(response.topics));
-      return tabsWrapper;
-    })
-    .catch ( error => {
-      console.log("Error", error);
+    .then( response => {   
+      const topics = Object.values(response.data.topics)
+      const container = document.querySelector(selector);
+     container.appendChild(Tabs(topics));
     })
 }
 
